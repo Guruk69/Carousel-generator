@@ -1,0 +1,13 @@
+# Handle line endings
+* text=auto
+
+# Binary files
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+
+# Keep Python files with LF
+*.py text eol=lf
