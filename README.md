@@ -5,6 +5,7 @@ Generate images with Google's Gemini API.
 `uv` is required to easily install dependencies.
 
 Video Guide: https://youtu.be/NBibgD7I48w
+
 More AI Engineering help can be found in https://aiengineer.community/join
 
 ## Setup
