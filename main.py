@@ -36,12 +36,34 @@ import os
 import re
 from pathlib import Path
 from typing import Optional
+from fastapi import FastAPI
+from pydantic import BaseModel
+import base64
 
 from dotenv import load_dotenv
 from google import genai
 from google.genai import types
 from PIL import Image
 
+from dotenv import load_dotenv
+load_dotenv()
+
+from fastapi.middleware.cors import CORSMiddleware
+
+
+app = FastAPI()
+
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+class PromptRequest(BaseModel):
+    prompt: str
 
 def load_style_template(style_path: Path) -> str:
     """
@@ -344,3 +366,19 @@ Examples:
 
 if __name__ == "__main__":
     main()
+
+@app.post("/generate-image")
+async def generate_image_api(req: PromptRequest):
+
+    prompt = req.prompt
+
+    output_path = Path("out.png")
+
+    generate_image(prompt, output_path, aspect_ratio="4:5")
+
+    with open(output_path, "rb") as f:
+        image_bytes = f.read()
+
+    base64_image = base64.b64encode(image_bytes).decode()
+
+    return {"image": base64_image}
