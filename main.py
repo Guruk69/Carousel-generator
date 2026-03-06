@@ -135,7 +135,7 @@ def edit_image(
                 print(f"Warning: Reference image not found: {ref_path}")
 
     response = client.models.generate_content(
-        model="gemini-3-pro-image-preview",
+        model="gemini-3.1-flash-image-preview",
         contents=contents,
         config=types.GenerateContentConfig(
             response_modalities=["IMAGE", "TEXT"],
@@ -183,7 +183,7 @@ def generate_image(
                 print(f"Warning: Reference image not found: {ref_path}")
 
         response = client.models.generate_content(
-            model="gemini-3-pro-image-preview",
+            model="gemini-3.1-flash-image-preview",
             contents=contents,
             config=types.GenerateContentConfig(
                 response_modalities=["IMAGE", "TEXT"],
@@ -217,7 +217,7 @@ def generate_image(
         )
 
         for chunk in client.models.generate_content_stream(
-            model="gemini-3-pro-image-preview",
+            model="gemini-3.1-flash-image-preview",
             contents=contents,
             config=config,
         ):
